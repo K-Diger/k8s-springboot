@@ -1,0 +1,31 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
+    show-sql: ${SPRING_JPA_SHOW_SQL:false}
+
+server:
+  port: 8080
+
+jwt:
+  expiration: ${JWT_EXPIRATION}
+  secret: ${JWT_SECRET}
+
+logging:
+  level:
+    root: ${LOGGING_LEVEL_ROOT}
+    org.springframework: ${LOGGING_LEVEL_ORG_SPRINGFRAMEWORK}
+    com.myapp: ${LOGGING_LEVEL_COM_MYAPP}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ${MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE}

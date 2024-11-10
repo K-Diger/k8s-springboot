@@ -1,0 +1,36 @@
+spring:
+  profiles:
+    group:
+      dev: dev
+      prod: prod
+  config:
+    import:
+      - optional:file:./config/application-dev.yml
+      - optional:file:./config/application-prod.yml
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+        default_batch_fetch_size: 100
+
+server:
+  shutdown: graceful
+  tomcat:
+    threads:
+      max: 200
+    connection-timeout: 5s
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      enabled: true
