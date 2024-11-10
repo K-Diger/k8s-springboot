@@ -1,0 +1,29 @@
+# overlays/prod/configmap-patch.yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: springboot-config
+data:
+  # 애플리케이션 프로파일
+  SPRING_PROFILES_ACTIVE: "prod"
+
+  # 데이터베이스 설정
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://prod-db-host:5432/myapp_prod"
+
+  # JPA 설정
+  SPRING_JPA_HIBERNATE_DDL_AUTO: "validate"
+  SPRING_JPA_SHOW_SQL: "false"
+
+  # JWT 설정
+  JWT_EXPIRATION: "86400000"  # 24시간
+
+  # 로깅 설정
+  LOGGING_LEVEL_ROOT: "INFO"
+  LOGGING_LEVEL_ORG_SPRINGFRAMEWORK: "WARN"
+  LOGGING_LEVEL_COM_MYAPP: "INFO"
+
+  # 액추에이터 설정
+  MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: "health,prometheus,metrics"
+
+  # JVM 설정
+  JAVA_TOOL_OPTIONS: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0 -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError"

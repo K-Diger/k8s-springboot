@@ -1,0 +1,15 @@
+# base/configmap.yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: springboot-config
+  namespace: springboot-app
+data:
+  # 애플리케이션 설정
+  SPRING_PROFILES_ACTIVE: "prod"
+  DATABASE_HOST: "external-db-host"
+  DATABASE_PORT: "5432"
+  # 모니터링 설정
+  MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: "health,prometheus,metrics"
+  # JVM 설정
+  JAVA_TOOL_OPTIONS: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0"

@@ -1,0 +1,11 @@
+# base/namespace.yml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: springboot-app
+  labels:
+    # Pod Security Standards를 적용합니다
+    # restricted: 가장 엄격한 보안 정책을 적용
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/warn: restricted

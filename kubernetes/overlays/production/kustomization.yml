@@ -1,0 +1,12 @@
+# overlays/prod/kustomization.yml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base
+namePrefix: prod-
+commonLabels:
+  environment: production
+patches:
+  - path: configmap-patch.yml
+  - path: secrets-patch.yml
+  - path: deployment-patch.yml

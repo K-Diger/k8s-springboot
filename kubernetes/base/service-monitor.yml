@@ -1,0 +1,14 @@
+# base/service-monitor.yml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: springboot-monitor
+  namespace: springboot-app
+spec:
+  selector:
+    matchLabels:
+      app: springboot-app
+  endpoints:
+    - port: http
+      path: /actuator/prometheus  # Prometheus 메트릭 수집 경로
+      interval: 15s  # 메트릭 수집 주기

@@ -1,0 +1,11 @@
+# base/pod-disruption-budget.yml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: springboot-pdb
+  namespace: springboot-app
+spec:
+  minAvailable: 1  # 최소 1개의 파드는 항상 가용상태 유지
+  selector:
+    matchLabels:
+      app: springboot-app

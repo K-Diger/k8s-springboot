@@ -1,0 +1,29 @@
+# base/network-policy.yml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: springboot-network-policy
+  namespace: springboot-app
+spec:
+  podSelector:
+    matchLabels:
+      app: springboot-app
+  policyTypes:
+    - Ingress  # 수신 트래픽 정책
+    - Egress   # 송신 트래픽 정책
+  ingress:
+    - from:
+        - namespaceSelector:  # 인그레스 컨트롤러로부터의 트래픽만 허용
+            matchLabels:
+              name: ingress-nginx
+      ports:
+        - protocol: TCP
+          port: 8080
+  egress:
+    - to:
+        - namespaceSelector:  # 데이터베이스로의 트래픽만 허용
+            matchLabels:
+              name: database
+      ports:
+        - protocol: TCP
+          port: 5432

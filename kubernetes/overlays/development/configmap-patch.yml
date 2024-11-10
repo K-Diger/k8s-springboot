@@ -1,0 +1,29 @@
+# overlays/dev/configmap-patch.yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: springboot-config
+data:
+  # 애플리케이션 프로파일
+  SPRING_PROFILES_ACTIVE: "dev"
+
+  # 데이터베이스 설정
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://dev-db-host:5432/myapp_dev"
+
+  # JPA 설정
+  SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
+  SPRING_JPA_SHOW_SQL: "true"
+
+  # JWT 설정
+  JWT_EXPIRATION: "3600000"  # 1시간
+
+  # 로깅 설정
+  LOGGING_LEVEL_ROOT: "DEBUG"
+  LOGGING_LEVEL_ORG_SPRINGFRAMEWORK: "DEBUG"
+  LOGGING_LEVEL_COM_MYAPP: "DEBUG"
+
+  # 액추에이터 설정
+  MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: "health,prometheus,metrics,info"
+
+  # JVM 설정
+  JAVA_TOOL_OPTIONS: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0 -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005"
